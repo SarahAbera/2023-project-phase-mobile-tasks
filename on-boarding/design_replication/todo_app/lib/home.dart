@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:todo_app/add_task.dart';
+import 'package:todo_app/task_detail.dart';
 
 class CardData {
   final String title;
@@ -117,84 +118,87 @@ class MyCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 75,
-      width: 400,
-      child: Card(
-        elevation: 6,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Stack(
-            alignment: Alignment.centerLeft,
-            children: [
-              Positioned(
-                left: 0,
-                top: 0,
-                bottom: 0,
-                width: 40, // Add width constraint
-                child: Stack(alignment: Alignment.center, children: [
-                  Positioned(
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.blue,
-                        shape: BoxShape.circle,
+    return GestureDetector(
+      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => TaskDetail())),
+      child: SizedBox(
+        height: 75,
+        width: 400,
+        child: Card(
+          elevation: 6,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Stack(
+              alignment: Alignment.centerLeft,
+              children: [
+                Positioned(
+                  left: 0,
+                  top: 0,
+                  bottom: 0,
+                  width: 40, // Add width constraint
+                  child: Stack(alignment: Alignment.center, children: [
+                    Positioned(
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          color: Colors.blue,
+                          shape: BoxShape.circle,
+                        ),
                       ),
                     ),
-                  ),
-                  Positioned(
-                      child: Text(
-                    cardData.inCircle,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20),
-                  ))
-                ]),
-              ),
-              Positioned(
-                left: 60,
-                top: 3,
-                // Add right constraint
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      cardData.title,
+                    Positioned(
+                        child: Text(
+                      cardData.inCircle,
                       style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                    ),
-                  ],
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
+                    ))
+                  ]),
                 ),
-              ),
-              Positioned(
-                right: 10,
-                top: 2,
-                child: Text(
-                  cardData.date,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Colors.blueGrey,
+                Positioned(
+                  left: 60,
+                  top: 3,
+                  // Add right constraint
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        cardData.title,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-              const Positioned(
-                  right: 1,
-                  child: SizedBox(
-                    height: 80,
-                    width: 10,
-                    child: VerticalDivider(
-                      thickness: 2,
-                      indent: 3,
-                      color: Color.fromARGB(255, 8, 14, 100),
+                Positioned(
+                  right: 10,
+                  top: 2,
+                  child: Text(
+                    cardData.date,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: Colors.blueGrey,
                     ),
-                  )),
-              const SizedBox(height: 8)
-            ],
+                  ),
+                ),
+                const Positioned(
+                    right: 1,
+                    child: SizedBox(
+                      height: 80,
+                      width: 10,
+                      child: VerticalDivider(
+                        thickness: 2,
+                        indent: 3,
+                        color: Color.fromARGB(255, 8, 14, 100),
+                      ),
+                    )),
+                const SizedBox(height: 8)
+              ],
+            ),
           ),
         ),
       ),
