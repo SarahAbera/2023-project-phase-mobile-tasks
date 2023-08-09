@@ -21,7 +21,7 @@ class TodoList extends StatelessWidget {
     CardData(title: "UI/UX app design", inCircle: "U", date: "August 8,2023"),
     CardData(title: "Flutter layout", inCircle: "F", date: "August 8,2023"),
     CardData(
-        title: "Navigation & routing", inCircle: "N", date: "August 8,2023")
+        title: "Navigation & routi", inCircle: "N", date: "August 8,2023")
   ];
 
   @override
@@ -84,28 +84,31 @@ class TodoList extends StatelessWidget {
                   }).toList(),
                 ),
               ),
-              Center(
-                child: SizedBox(
-                  height: 50,
-                  width: 200,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AddTask()));
-                    },
-                    style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        backgroundColor: Colors.blue,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        )),
-                    child: const Text(
-                      "Create task",
-                      style: TextStyle(
-                          fontSize: 24, fontWeight: FontWeight.bold),
-                    ))
+              Container(
+                margin: const EdgeInsets.only(bottom: 20),
+                child: Center(
+                  child: SizedBox(
+                    height: 60,
+                    width: 300,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AddTask()));
+                      },
+                      style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor:const Color(0xFF3FAEE5),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          )),
+                      child: const Text(
+                        "Create task",
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
+                      ))
+                  ),
                 ),
               )
             ])));
@@ -142,7 +145,7 @@ class MyCard extends StatelessWidget {
                     Positioned(
                       child: Container(
                         decoration: const BoxDecoration(
-                          color: Colors.blue,
+                          color:  Color(0xFF3FAEE5),
                           shape: BoxShape.circle,
                         ),
                       ),
