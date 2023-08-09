@@ -33,6 +33,7 @@ class AddTask extends StatelessWidget {
         leadingWidth: 80,
       ),
       body: Container(
+        height: MediaQuery.of(context).size.height,
         color: Colors.white,
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -53,7 +54,7 @@ class AddTask extends StatelessWidget {
                 height: 25,
                 thickness: 1,
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 16),
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 const Padding(
                   padding: EdgeInsets.all(10),
@@ -78,7 +79,7 @@ class AddTask extends StatelessWidget {
                             TextStyle(color: Colors.black.withOpacity(0.4))),
                   ),
                 ])),
-                const SizedBox(height: 12),
+                const SizedBox(height: 10),
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   const Padding(
                     padding: EdgeInsets.all(10),
@@ -105,7 +106,7 @@ class AddTask extends StatelessWidget {
                       ),
                     ),
                   ])),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 10),
                   Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -136,7 +137,7 @@ class AddTask extends StatelessWidget {
                       ])
                 ]),
               ]),
-          const SizedBox(height: 50),
+          const SizedBox(height: 40),
           SizedBox(
           width: 250,
           height: 75,

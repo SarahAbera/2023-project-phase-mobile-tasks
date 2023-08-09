@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:todo_app/add_task.dart';
+
+
+import 'home.dart';
 
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({Key? key}) : super(key: key);
@@ -37,7 +39,7 @@ class OnboardingPage extends StatelessWidget {
           onPressed:(){
             Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) =>  AddTask()),
+                MaterialPageRoute(builder: (context) =>  TodoList()),
               );
           }, 
           style: ElevatedButton.styleFrom(
