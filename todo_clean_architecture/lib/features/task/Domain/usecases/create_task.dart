@@ -1,14 +1,24 @@
 import 'package:dartz/dartz.dart';
-import 'package:todo_clean_architecture/features/task/Domain/repositories/task_repository.dart';
-
+import 'package:equatable/equatable.dart';
+import '../../../../core/usecase/usecase.dart';
+import '../repositories/task_repository.dart';
 import '../../../../core/error/failure.dart';
 import '../entities/task.dart';
 
-class CreateTask {
+class CreateTask implements UseCase<Tasks, Params> {
   final TasksRepository tasksRepository;
   CreateTask(this.tasksRepository);
 
-  Future<Either<Failure, Tasks>> execute({required task}) async {
-    return await tasksRepository.createTasks(task);
+  @override
+  Future<Either<Failure, Tasks>> call(Params params) async {
+    return await tasksRepository.createTasks(params.task);
   }
+}
+
+class Params extends Equatable {
+  final Tasks task;
+  const Params({required this.task});
+
+  @override
+  List<Object?> get props => [task];
 }

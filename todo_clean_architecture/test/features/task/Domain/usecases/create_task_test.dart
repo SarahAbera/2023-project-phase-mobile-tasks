@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:todo_clean_architecture/core/usecase/usecase.dart';
 import 'package:todo_clean_architecture/features/task/Domain/entities/task.dart';
 import 'package:todo_clean_architecture/features/task/Domain/repositories/task_repository.dart';
 import 'package:todo_clean_architecture/features/task/Domain/usecases/create_task.dart';
@@ -17,23 +18,23 @@ void main() {
     usecase = CreateTask(mockTasksRepository);
   });
 
-  Tasks task = Tasks(
+  Tasks tTask = Tasks(
       id: "2",
       title: "title5",
       description: "desc3",
       dueDate: DateTime(2023, 8, 19));
 
-  test("Should delete the task by it's taskId", () async {
+  test("Should create the tTask", () async {
     // arrange
-    when(mockTasksRepository.createTasks(task))
-        .thenAnswer((_) async => Right(task));
+    when(mockTasksRepository.createTasks(tTask))
+        .thenAnswer((_) async => Right(tTask));
 
     // act
-    final result = await usecase.execute(task:task);
+    final result = await usecase(Params(task: tTask));
 
     // assert
-    expect(result, Right(task));
-    verify(mockTasksRepository.createTasks(task));
+    expect(result, Right(tTask));
+    verify(mockTasksRepository.createTasks(tTask));
     verifyNoMoreInteractions(mockTasksRepository);
 
   });

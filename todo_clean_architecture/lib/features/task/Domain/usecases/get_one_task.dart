@@ -1,13 +1,14 @@
 import 'package:dartz/dartz.dart';
-import 'package:todo_clean_architecture/core/error/failure.dart';
-import 'package:todo_clean_architecture/features/task/Domain/repositories/task_repository.dart';
+import 'package:todo_clean_architecture/core/usecase/usecase.dart';
+import '../../../../core/error/failure.dart';
+import '../repositories/task_repository.dart';
 import '../entities/task.dart';
 
-class GetOneTask {
+class GetOneTask extends UseCase<Tasks, String> {
   final TasksRepository tasksRepository;
   GetOneTask(this.tasksRepository);
-
-  Future<Either<Failure, Tasks>> execute({required String taskId}) async {
-    return await tasksRepository.getOneTask(taskId);
+  @override
+  Future<Either<Failure, Tasks>> call(String params) async {
+    return await tasksRepository.getOneTask(params);
   }
 }

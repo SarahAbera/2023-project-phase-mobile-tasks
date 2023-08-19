@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:todo_clean_architecture/core/usecase/usecase.dart';
 import 'package:todo_clean_architecture/features/task/Domain/repositories/task_repository.dart';
 import 'package:todo_clean_architecture/features/task/Domain/usecases/get_all_tasks.dart';
 import 'package:todo_clean_architecture/features/task/Domain/entities/task.dart';
@@ -39,9 +40,7 @@ void main() {
     when(mockTasksRepository.getAllTasks())
         .thenAnswer((_) async => Right(tasks));
     // act
-
-    // final result = await usecase(NoParams());
-    final result = await usecase.execute();
+    final result = await usecase(NoParams());
 
     // assert
     expect(result, Right(tasks));

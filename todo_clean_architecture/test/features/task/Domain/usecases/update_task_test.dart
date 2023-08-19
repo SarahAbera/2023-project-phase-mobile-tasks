@@ -31,7 +31,7 @@ void main() {
         .thenAnswer((_) async => Right(tTask));
 
     // act
-    final result = await usecase.execute(taskId: tTaskId);
+    final result = await usecase(tTaskId);
 
     // assert
     expect(result, Right(tTask));
