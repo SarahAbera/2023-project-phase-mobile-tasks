@@ -2,10 +2,9 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:todo_clean_architecture/core/usecase/usecase.dart';
-import 'package:todo_clean_architecture/features/task/Domain/entities/task.dart';
-import 'package:todo_clean_architecture/features/task/Domain/repositories/task_repository.dart';
-import 'package:todo_clean_architecture/features/task/Domain/usecases/delete_task.dart';
+import 'package:todo_clean_architecture/features/todo/Domain/entities/task.dart';
+import 'package:todo_clean_architecture/features/todo/Domain/repositories/task_repository.dart';
+import 'package:todo_clean_architecture/features/todo/Domain/usecases/delete_task.dart';
 
 import 'delete_task_test.mocks.dart';
 

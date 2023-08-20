@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart' hide Task;
-import 'package:equatable/equatable.dart';
 import 'package:todo_clean_architecture/core/usecase/usecase.dart';
 
 import '../../../../core/error/failure.dart';

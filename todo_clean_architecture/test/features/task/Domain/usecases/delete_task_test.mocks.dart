@@ -8,9 +8,9 @@ import 'dart:async' as _i4;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:todo_clean_architecture/core/error/failure.dart' as _i5;
-import 'package:todo_clean_architecture/features/task/Domain/entities/task.dart'
+import 'package:todo_clean_architecture/features/todo/Domain/entities/task.dart'
     as _i6;
-import 'package:todo_clean_architecture/features/task/Domain/repositories/task_repository.dart'
+import 'package:todo_clean_architecture/features/todo/Domain/repositories/task_repository.dart'
     as _i3;
 
 // ignore_for_file: type=lint

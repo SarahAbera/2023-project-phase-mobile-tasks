@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:todo_clean_architecture/core/usecase/usecase.dart';
-import 'package:todo_clean_architecture/features/task/Domain/repositories/task_repository.dart';
-import 'package:todo_clean_architecture/features/task/Domain/usecases/get_all_tasks.dart';
-import 'package:todo_clean_architecture/features/task/Domain/entities/task.dart';
+import 'package:todo_clean_architecture/features/todo/Domain/repositories/task_repository.dart';
+import 'package:todo_clean_architecture/features/todo/Domain/usecases/get_all_tasks.dart';
+import 'package:todo_clean_architecture/features/todo/Domain/entities/task.dart';
 import 'package:mockito/annotations.dart';
 import 'package:dartz/dartz.dart' hide Task;
 import 'get_all_tasks_test.mocks.dart';
