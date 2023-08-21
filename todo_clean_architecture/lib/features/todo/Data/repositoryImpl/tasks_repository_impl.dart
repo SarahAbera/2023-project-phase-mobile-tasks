@@ -1,13 +1,10 @@
 import 'package:dartz/dartz.dart';
-
-import 'package:todo_clean_architecture/core/error/failure.dart';
-import 'package:todo_clean_architecture/core/playform/network_info.dart';
-import 'package:todo_clean_architecture/features/todo/Data/dataSources/tasks_local_datasource.dart';
-import 'package:todo_clean_architecture/features/todo/Data/dataSources/tasks_remote_datasource.dart';
-
-import 'package:todo_clean_architecture/features/todo/Domain/entities/task.dart';
-
-import '../../../../../test/features/todo/Data/repository/task_repository_impl_test.mocks.dart';
+import 'package:todo_clean_architecture/core/error/exception.dart';
+import '../../../../core/error/failure.dart';
+import '../../../../core/playform/network_info.dart';
+import '../dataSources/tasks_local_datasource.dart';
+import '../dataSources/tasks_remote_datasource.dart';
+import '../../Domain/entities/task.dart';
 import '../../Domain/repositories/task_repository.dart';
 
 class TasksRepositoryImpl implements TasksRepository {
@@ -18,31 +15,66 @@ class TasksRepositoryImpl implements TasksRepository {
   TasksRepositoryImpl({
     required this.remoteDataSource,
     required this.localDataSource,
-    required this.network, 
+    required this.network,
   });
 
   @override
-  Future<Either<Failure, Tasks>> createTasks(Tasks task) {
-    throw UnimplementedError();
+  Future<Either<Failure, Tasks>> createTasks(Tasks task) async {
+    try {
+      final remoteTasks = await remoteDataSource.createTasks(task);
+      return Right(remoteTasks);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
   }
 
   @override
-  Future<Either<Failure, Tasks>> deleteTasks(String taskId) {
-    throw UnimplementedError();
+  Future<Either<Failure, Tasks>> deleteTasks(String taskId) async {
+    try {
+      final remoteTasks = await remoteDataSource.deleteTasks(taskId);
+      return Right(remoteTasks);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
   }
 
   @override
-  Future<Either<Failure, List<Tasks>>> getAllTasks() {
-    throw UnimplementedError();
+  Future<Either<Failure, List<Tasks>>> getAllTasks() async {
+    if (await network.isConnected) {
+      try {
+        final remoteTasks = await remoteDataSource.getAllTasks();
+        localDataSource.cacheCurrentTodoList(remoteTasks);
+        return Right(remoteTasks);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      try {
+        final localTasks = await localDataSource.getAllTasks();
+        return Right(localTasks);
+      } on CacheException {
+        return Left(CacheFailure());
+      }
+    }
   }
 
   @override
-  Future<Either<Failure, Tasks>> getOneTask(String taskId) {
-    throw UnimplementedError();
+  Future<Either<Failure, Tasks>> getOneTask(String taskId) async {
+    try {
+      final remoteTasks = await remoteDataSource.getOneTask(taskId);
+      return Right(remoteTasks);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
   }
 
   @override
-  Future<Either<Failure, Tasks>> updateTasks(String taskId) {
-    throw UnimplementedError();
+  Future<Either<Failure, Tasks>> updateTasks(String taskId) async {
+    try {
+      final remoteTasks = await remoteDataSource.updateTasks(taskId);
+      return Right(remoteTasks);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
   }
 }
