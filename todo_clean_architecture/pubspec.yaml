@@ -15,7 +15,9 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.3
+  internet_connection_checker: ^1.0.0+1
   mockito: ^5.4.2
+
   # Service locator
   # Functional programming thingies
   # Remote API

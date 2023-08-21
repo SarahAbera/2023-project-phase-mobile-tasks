@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:todo_clean_architecture/core/error/exception.dart';
 import '../../../../core/error/failure.dart';
-import '../../../../core/playform/network_info.dart';
+import '../../../../core/Network/network_info.dart';
 import '../dataSources/tasks_local_datasource.dart';
 import '../dataSources/tasks_remote_datasource.dart';
 import '../../Domain/entities/task.dart';

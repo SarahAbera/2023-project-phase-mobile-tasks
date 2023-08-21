@@ -1,7 +1,7 @@
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:todo_clean_architecture/core/playform/network_info.dart';
+import 'package:todo_clean_architecture/core/Network/network_info.dart';
 import 'package:todo_clean_architecture/features/todo/Data/dataSources/tasks_local_datasource.dart';
 import 'package:todo_clean_architecture/features/todo/Data/dataSources/tasks_remote_datasource.dart';
 import 'package:todo_clean_architecture/features/todo/Data/repositoryImpl/tasks_repository_impl.dart';
