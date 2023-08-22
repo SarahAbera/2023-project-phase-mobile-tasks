@@ -17,17 +17,25 @@ class TasksLocalDataSourceImpl implements TasksLocalDataSource {
   TasksLocalDataSourceImpl({required this.sharedPreferences});
 
   @override
-  Future<void> cacheCurrentTodoList(List<Tasks> todoListToCache) async{
-    await sharedPreferences.setString(
-        CACHED_TASKS, jsonEncode(todoListToCache));
+  Future<void> cacheCurrentTodoList(List<Tasks> todoListToCache) async {
+    final tasks = todoListToCache.map((task) {
+      TaskModel taskModel = TaskModel(
+          id: task.id,
+          title: task.title,
+          description: task.description,
+          dueDate: task.dueDate);
+
+      return jsonEncode(taskModel.toJson());
+    }).toList();
+    await sharedPreferences.setStringList(CACHED_TASKS, tasks);
   }
 
   @override
   Future<List<Tasks>> getAllTasks() async {
-    final jsonString = sharedPreferences.getString(CACHED_TASKS);
-    final decodedJson = json.decode(jsonString!);
-    return decodedJson
-        .map<TaskModel>((object) => TaskModel.fromJson(object))
+    final jsonStrings = sharedPreferences.getStringList(CACHED_TASKS);
+    final taskModels = jsonStrings!
+        .map((encodedJson) => TaskModel.fromJson(jsonDecode(encodedJson)))
         .toList();
+    return taskModels;
   }
 }

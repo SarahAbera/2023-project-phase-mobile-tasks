@@ -1,7 +1,8 @@
 import 'package:equatable/equatable.dart';
 
+import '../../Data/models/task_model.dart';
 
-class Tasks extends Equatable{
+class Tasks extends Equatable {
   final String id;
   final String title;
   final String description;
@@ -17,5 +18,4 @@ class Tasks extends Equatable{
 
   @override
   List<Object?> get props => [id, title, description, dueDate, completed];
-
 }

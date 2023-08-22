@@ -27,4 +27,6 @@ class TaskModel extends Tasks {
       "status": completed ? 'Completed' : 'In Progress',
     };
   }
+
+  Object? map(Function(dynamic task) param0) {}
 }
