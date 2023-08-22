@@ -66,7 +66,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
         date: DateTime.now(),
       );
 
-      Navigator.pop(context, newTask);
+      Navigator.pop(context, [newTask.title, newTask.description]);
     }
   }
 }

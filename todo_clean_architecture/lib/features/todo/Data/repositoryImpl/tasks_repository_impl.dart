@@ -20,12 +20,7 @@ class TasksRepositoryImpl implements TasksRepository {
 
   @override
   Future<Either<Failure, Tasks>> createTasks(Tasks task) async {
-    try {
-      final remoteTasks = await remoteDataSource.createTasks(task);
-      return Right(remoteTasks);
-    } on ServerException {
-      return Left(ServerFailure());
-    }
+    throw UnimplementedError();
   }
 
   @override

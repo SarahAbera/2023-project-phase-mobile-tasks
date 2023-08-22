@@ -28,5 +28,4 @@ class TaskModel extends Tasks {
     };
   }
 
-  Object? map(Function(dynamic task) param0) {}
 }
