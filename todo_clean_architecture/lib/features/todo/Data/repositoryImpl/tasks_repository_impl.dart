@@ -6,6 +6,7 @@ import '../dataSources/tasks_local_datasource.dart';
 import '../dataSources/tasks_remote_datasource.dart';
 import '../../Domain/entities/task.dart';
 import '../../Domain/repositories/task_repository.dart';
+import '../models/task_model.dart';
 
 class TasksRepositoryImpl implements TasksRepository {
   final TaskRemoteDataSource remoteDataSource;
@@ -20,7 +21,12 @@ class TasksRepositoryImpl implements TasksRepository {
 
   @override
   Future<Either<Failure, Tasks>> createTasks(Tasks task) async {
-    throw UnimplementedError();
+    try {
+      final remoteTasks = await remoteDataSource.createTasks(task);
+      return Right(remoteTasks);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
   }
 
   @override
@@ -64,9 +70,9 @@ class TasksRepositoryImpl implements TasksRepository {
   }
 
   @override
-  Future<Either<Failure, Tasks>> updateTasks(String taskId) async {
+  Future<Either<Failure, Tasks>> updateTasks(TaskModel todo) async {
     try {
-      final remoteTasks = await remoteDataSource.updateTasks(taskId);
+      final remoteTasks = await remoteDataSource.updateTasks(todo);
       return Right(remoteTasks);
     } on ServerException {
       return Left(ServerFailure());

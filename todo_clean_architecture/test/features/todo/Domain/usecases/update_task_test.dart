@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:todo_clean_architecture/features/todo/Data/models/task_model.dart';
 import 'package:todo_clean_architecture/features/todo/Domain/repositories/task_repository.dart';
 import 'package:todo_clean_architecture/features/todo/Domain/entities/task.dart';
 import 'package:mockito/annotations.dart';
@@ -17,25 +18,30 @@ void main() {
     mockTasksRepository = MockTasksRepository();
     usecase = UpdateTask(mockTasksRepository);
   });
-
-  String tTaskId = "1";
+  
   Tasks tTask = Tasks(
       id: '1',
       title: "title1",
       description: "description1",
       dueDate: DateTime(2023, 8, 10));
 
+  TaskModel todo = TaskModel(
+      id: tTask.id,
+      title: tTask.title,
+      description: tTask.description,
+      dueDate: tTask.dueDate);
+
   test("Should get one task with the matching taskId", () async {
     // arrange
-    when(mockTasksRepository.updateTasks(tTaskId))
+    when(mockTasksRepository.updateTasks(todo))
         .thenAnswer((_) async => Right(tTask));
 
     // act
-    final result = await usecase(tTaskId);
+    final result = await usecase(todo);
 
     // assert
     expect(result, Right(tTask));
-    verify(mockTasksRepository.updateTasks(tTaskId));
+    verify(mockTasksRepository.updateTasks(todo));
     verifyNoMoreInteractions(mockTasksRepository);
   });
 }

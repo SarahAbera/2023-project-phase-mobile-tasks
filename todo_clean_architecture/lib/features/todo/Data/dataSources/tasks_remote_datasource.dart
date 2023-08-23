@@ -9,7 +9,7 @@ abstract class TaskRemoteDataSource {
   Future<Tasks> getOneTask(String taskId);
   Future<Tasks> createTasks(Tasks task);
   Future<Tasks> deleteTasks(String taskId);
-  Future<Tasks> updateTasks(String taskId);
+  Future<Tasks> updateTasks(TaskModel todo);
 }
 
 class TaskRemoteDataSourceImpl implements TaskRemoteDataSource {
@@ -51,7 +51,7 @@ class TaskRemoteDataSourceImpl implements TaskRemoteDataSource {
     try {
       final response = await client.delete(url, headers: header);
 
-      if (response.statusCode == 204) {
+      if (response.statusCode == 200) {
         final responseFromBackend = jsonDecode(response.body);
         final deletedTaskModel = TaskModel.fromJson(responseFromBackend);
         // final deletedTaskModel = TaskModel(
@@ -116,13 +116,13 @@ class TaskRemoteDataSourceImpl implements TaskRemoteDataSource {
   }
 
   @override
-  Future<Tasks> updateTasks(String taskId) async {
-    var url = Uri.parse("http://api_end_point/task/$taskId");
+  Future<Tasks> updateTasks(TaskModel todo) async {
+    var url = Uri.parse("http://api_end_point/task/${todo.id}");
     var header = {"content": "application/json"};
-
-    final response = await client.put(url, headers: header);
+    var body = jsonEncode(todo.toJson());
+    final response = await client.put(url, headers: header, body: body);
     try {
-      if (response.statusCode == 204) {
+      if (response.statusCode == 200) {
         final responseTask = jsonDecode(response.body);
         final updatedTaskModel = TaskModel.fromJson(responseTask);
         return updatedTaskModel;

@@ -13,6 +13,8 @@ import 'package:todo_clean_architecture/features/todo/Data/dataSources/tasks_loc
     as _i3;
 import 'package:todo_clean_architecture/features/todo/Data/dataSources/tasks_remote_datasource.dart'
     as _i2;
+import 'package:todo_clean_architecture/features/todo/Data/models/task_model.dart'
+    as _i10;
 import 'package:todo_clean_architecture/features/todo/Data/repositoryImpl/tasks_repository_impl.dart'
     as _i7;
 import 'package:todo_clean_architecture/features/todo/Domain/entities/task.dart'
@@ -223,18 +225,19 @@ class MockTasksRepositoryImpl extends _i1.Mock
         )),
       ) as _i8.Future<_i5.Either<_i9.Failure, _i6.Tasks>>);
   @override
-  _i8.Future<_i5.Either<_i9.Failure, _i6.Tasks>> updateTasks(String? taskId) =>
+  _i8.Future<_i5.Either<_i9.Failure, _i6.Tasks>> updateTasks(
+          _i10.TaskModel? todo) =>
       (super.noSuchMethod(
         Invocation.method(
           #updateTasks,
-          [taskId],
+          [todo],
         ),
         returnValue: _i8.Future<_i5.Either<_i9.Failure, _i6.Tasks>>.value(
             _FakeEither_3<_i9.Failure, _i6.Tasks>(
           this,
           Invocation.method(
             #updateTasks,
-            [taskId],
+            [todo],
           ),
         )),
         returnValueForMissingStub:
@@ -243,7 +246,7 @@ class MockTasksRepositoryImpl extends _i1.Mock
           this,
           Invocation.method(
             #updateTasks,
-            [taskId],
+            [todo],
           ),
         )),
       ) as _i8.Future<_i5.Either<_i9.Failure, _i6.Tasks>>);
@@ -355,23 +358,24 @@ class MockTaskRemoteDataSource extends _i1.Mock
         )),
       ) as _i8.Future<_i6.Tasks>);
   @override
-  _i8.Future<_i6.Tasks> updateTasks(String? taskId) => (super.noSuchMethod(
+  _i8.Future<_i6.Tasks> updateTasks(_i10.TaskModel? todo) =>
+      (super.noSuchMethod(
         Invocation.method(
           #updateTasks,
-          [taskId],
+          [todo],
         ),
         returnValue: _i8.Future<_i6.Tasks>.value(_FakeTasks_4(
           this,
           Invocation.method(
             #updateTasks,
-            [taskId],
+            [todo],
           ),
         )),
         returnValueForMissingStub: _i8.Future<_i6.Tasks>.value(_FakeTasks_4(
           this,
           Invocation.method(
             #updateTasks,
-            [taskId],
+            [todo],
           ),
         )),
       ) as _i8.Future<_i6.Tasks>);

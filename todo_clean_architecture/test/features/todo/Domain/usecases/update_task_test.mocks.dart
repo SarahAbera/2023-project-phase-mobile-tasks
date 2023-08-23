@@ -8,6 +8,8 @@ import 'dart:async' as _i4;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:todo_clean_architecture/core/error/failure.dart' as _i5;
+import 'package:todo_clean_architecture/features/todo/Data/models/task_model.dart'
+    as _i7;
 import 'package:todo_clean_architecture/features/todo/Domain/entities/task.dart'
     as _i6;
 import 'package:todo_clean_architecture/features/todo/Domain/repositories/task_repository.dart'
@@ -139,18 +141,19 @@ class MockTasksRepository extends _i1.Mock implements _i3.TasksRepository {
         )),
       ) as _i4.Future<_i2.Either<_i5.Failure, _i6.Tasks>>);
   @override
-  _i4.Future<_i2.Either<_i5.Failure, _i6.Tasks>> updateTasks(String? taskId) =>
+  _i4.Future<_i2.Either<_i5.Failure, _i6.Tasks>> updateTasks(
+          _i7.TaskModel? todo) =>
       (super.noSuchMethod(
         Invocation.method(
           #updateTasks,
-          [taskId],
+          [todo],
         ),
         returnValue: _i4.Future<_i2.Either<_i5.Failure, _i6.Tasks>>.value(
             _FakeEither_0<_i5.Failure, _i6.Tasks>(
           this,
           Invocation.method(
             #updateTasks,
-            [taskId],
+            [todo],
           ),
         )),
         returnValueForMissingStub:
@@ -159,7 +162,7 @@ class MockTasksRepository extends _i1.Mock implements _i3.TasksRepository {
           this,
           Invocation.method(
             #updateTasks,
-            [taskId],
+            [todo],
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.Failure, _i6.Tasks>>);
