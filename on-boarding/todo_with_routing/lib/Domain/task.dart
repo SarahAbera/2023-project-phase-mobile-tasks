@@ -3,11 +3,13 @@ class Task {
   final String title;
   final String description;
   final DateTime date;
+  bool completed;
 
-  const Task({
+  Task({
     required this.id,
     required this.title,
     required this.description,
     required this.date,
+    this.completed = false,
   });
 }

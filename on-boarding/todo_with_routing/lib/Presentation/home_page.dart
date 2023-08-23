@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import '../Domain/task.dart';
 import 'edit_task.dart';
 import '../Presentation/create_task.dart';
-
+import 'mycard.dart';
+import 'custom_app_bar.dart';
 
 class TaskListScreen extends StatefulWidget {
+  const TaskListScreen({super.key});
+
   @override
-  _TaskListScreenState createState() => _TaskListScreenState();
+  State<TaskListScreen> createState() => _TaskListScreenState();
 }
 
 class _TaskListScreenState extends State<TaskListScreen> {
@@ -21,47 +24,14 @@ class _TaskListScreenState extends State<TaskListScreen> {
       id: '2',
       title: 'Task 2',
       description: 'Description for Task 2',
-      date: DateTime.now(),
+      date: DateTime(2023,2,08),
     ),
-    // Add more tasks as needed
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            size: 40,
-            color: Color.fromRGBO(36, 47, 101, 1),
-          ),
-        ),
-        title: const Center(
-          child: Text(
-            "Todo List",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 30,
-              color: Color.fromRGBO(36, 47, 101, 1),
-            ),
-          ),
-        ),
-        backgroundColor: Colors.white,
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.more_vert,
-              size: 40,
-              color: Color.fromRGBO(36, 47, 101, 1),
-            ),
-            onPressed: () {},
-          )
-        ],
-      ),
+    return  Scaffold(
+      appBar:  const CustomAppBar(customTitle: "Tasks List"),
       body: Container(
         height: MediaQuery.of(context).size.height,
         color: Colors.white,
@@ -80,7 +50,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
               "Tasks list",
               style: TextStyle(
                 color: Color.fromRGBO(36, 47, 101, 1),
-                fontSize: 40,
+                fontSize: 30,
                 fontWeight: FontWeight.bold,
                 decoration: TextDecoration.none,
               ),
@@ -114,7 +84,8 @@ class _TaskListScreenState extends State<TaskListScreen> {
                     ),
                     child: const Text(
                       "Create task",
-                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -129,7 +100,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
   void _navigateToCreateTask() async {
     final result = await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => CreateTaskScreen()),
+      MaterialPageRoute(builder: (context) => const CreateTaskScreen()),
     );
 
     if (result != null && result is Task) {
@@ -156,58 +127,3 @@ class _TaskListScreenState extends State<TaskListScreen> {
   }
 }
 
-class MyCard extends StatelessWidget {
-  final Task task;
-  final VoidCallback onEdit;
-
-  const MyCard({
-    Key? key,
-    required this.task,
-    required this.onEdit,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 75,
-      width:300,
-      child: Card(
-        color: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
-          side: const BorderSide(
-            color: Color.fromRGBO(36, 47, 101, 1),
-            width: 1.0,
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  const SizedBox(width: 16.0),
-                  Text(
-                    task.title,
-                    style: const TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-              IconButton(
-                onPressed: onEdit,
-                icon: const Icon(
-                  Icons.edit,
-                  color: Color.fromRGBO(36, 47, 101, 1),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
