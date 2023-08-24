@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_with_routing/Presentation/task_detail.dart';
 import '../Domain/task.dart';
 import 'edit_task.dart';
 import '../Presentation/create_task.dart';
@@ -24,14 +25,14 @@ class _TaskListScreenState extends State<TaskListScreen> {
       id: '2',
       title: 'Task 2',
       description: 'Description for Task 2',
-      date: DateTime(2023,2,08),
+      date: DateTime(2023, 2, 08),
     ),
   ];
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      appBar:  const CustomAppBar(customTitle: "Tasks List"),
+    return Scaffold(
+      appBar: const CustomAppBar(customTitle: "Tasks List"),
       body: Container(
         height: MediaQuery.of(context).size.height,
         color: Colors.white,
@@ -63,6 +64,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
                   return MyCard(
                     task: task,
                     onEdit: () => _navigateToEditTask(task),
+                    onTaskDetail: () => _navigateToTaskDetail(task),
                   );
                 },
               ),
@@ -125,5 +127,15 @@ class _TaskListScreenState extends State<TaskListScreen> {
       });
     }
   }
-}
 
+  void _navigateToTaskDetail(Task task) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => (TaskDetailScreen(
+          task: task,
+        )),
+      ),
+    );
+  }
+}
