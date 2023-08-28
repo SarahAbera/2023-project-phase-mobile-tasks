@@ -6,11 +6,11 @@ import '../../../../core/error/failure.dart';
 import '../entities/task.dart';
 import '../repositories/task_repository.dart';
 
-class UpdateTask implements UseCase<Tasks, TaskModel> {
+class UpdateTask implements UseCase<Tasks, Tasks> {
   final TasksRepository tasksRepository;
   UpdateTask(this.tasksRepository);
   @override
-  Future<Either<Failure, Tasks>> call(TaskModel param) async {
+  Future<Either<Failure, Tasks>> call(Tasks param) async {
     return await tasksRepository.updateTasks(param);
   }
 }

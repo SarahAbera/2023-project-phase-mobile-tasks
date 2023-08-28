@@ -9,7 +9,7 @@ abstract class TaskRemoteDataSource {
   Future<Tasks> getOneTask(String taskId);
   Future<Tasks> createTasks(Tasks task);
   Future<Tasks> deleteTasks(String taskId);
-  Future<Tasks> updateTasks(TaskModel todo);
+  Future<Tasks> updateTasks(Tasks todo);
 }
 
 class TaskRemoteDataSourceImpl implements TaskRemoteDataSource {
@@ -24,19 +24,14 @@ class TaskRemoteDataSourceImpl implements TaskRemoteDataSource {
       description: todo.description,
       dueDate: todo.dueDate,
     );
-    var url = Uri.parse("https://api_end_point/task");
+    var url = Uri.parse("https://mock-todo-api-ib6b.onrender.com/api/v1/todo");
     var header = {"content": "application/json"};
     var body = json.encode(taskToBeCreated.toJson());
     try {
       final response = await client.post(url, headers: header, body: body);
-      final responseFromBackend = jsonDecode(response.body);
+      print(response.body);
+      final responseFromBackend = jsonDecode(response.body)["data"];
       final createdTask = TaskModel.fromJson(responseFromBackend);
-      // final createdTask = TaskModel(
-      //     id: responseFromBackend.id,
-      //     title: responseFromBackend.title,
-      //     description: responseFromBackend.description,
-      //     dueDate: responseFromBackend.dueDate,
-      //     completed: responseFromBackend.status);
 
       return createdTask;
     } catch (e) {
@@ -46,7 +41,8 @@ class TaskRemoteDataSourceImpl implements TaskRemoteDataSource {
 
   @override
   Future<Tasks> deleteTasks(String taskId) async {
-    var url = Uri.parse("http://api_end_point/task/$taskId");
+    var url = Uri.parse(
+        "https://mock-todo-api-ib6b.onrender.com/api/v1/todo/$taskId");
     var header = {"content": "application/json"};
     try {
       final response = await client.delete(url, headers: header);
@@ -54,11 +50,6 @@ class TaskRemoteDataSourceImpl implements TaskRemoteDataSource {
       if (response.statusCode == 200) {
         final responseFromBackend = jsonDecode(response.body);
         final deletedTaskModel = TaskModel.fromJson(responseFromBackend);
-        // final deletedTaskModel = TaskModel(
-        //     id: responseFromBackend.id,
-        //     title: responseFromBackend.title,
-        //     description: responseFromBackend.description,
-        //     dueDate: responseFromBackend.dueDate);
         return deletedTaskModel;
       } else {
         throw ServerException();
@@ -70,25 +61,17 @@ class TaskRemoteDataSourceImpl implements TaskRemoteDataSource {
 
   @override
   Future<List<Tasks>> getAllTasks() async {
-    String url = "https://api_end_point/task";
+    String url = "https://mock-todo-api-ib6b.onrender.com/api/v1/todo";
     try {
       final response = await client.get(
         Uri.parse(url),
         headers: {"content": 'application/json'},
       );
 
-      final List returnedFromBackend = jsonDecode(response.body);
+      final List returnedFromBackend = jsonDecode(response.body)["data"];
       List<TaskModel> tasks = returnedFromBackend
           .map((jsonTask) => TaskModel.fromJson(jsonTask))
           .toList();
-      // List<TaskModel> tasks = returnedFromBackend
-      //     .map((e) => TaskModel(
-      //         id: e.id,
-      //         title: e.title,
-      //         description: e.description,
-      //         dueDate: e.dueDate))
-      //     .toList();
-
       return tasks;
     } catch (e) {
       throw ServerException();
@@ -97,7 +80,8 @@ class TaskRemoteDataSourceImpl implements TaskRemoteDataSource {
 
   @override
   Future<Tasks> getOneTask(String taskId) async {
-    var url = Uri.parse("http://api_end_point/task/$taskId");
+    var url = Uri.parse(
+        "https://mock-todo-api-ib6b.onrender.com/api/v1/todo/$taskId");
     var header = {"content": "application/json"};
 
     try {
@@ -116,10 +100,16 @@ class TaskRemoteDataSourceImpl implements TaskRemoteDataSource {
   }
 
   @override
-  Future<Tasks> updateTasks(TaskModel todo) async {
-    var url = Uri.parse("http://api_end_point/task/${todo.id}");
+  Future<Tasks> updateTasks(Tasks todo) async {
+    var url = Uri.parse(
+        "https://mock-todo-api-ib6b.onrender.com/api/v1/todo/${todo.id}");
     var header = {"content": "application/json"};
-    var body = jsonEncode(todo.toJson());
+    final task = TaskModel(
+        id: todo.id,
+        title: todo.title,
+        description: todo.description,
+        dueDate: todo.dueDate);
+    var body = jsonEncode(task.toJson());
     final response = await client.put(url, headers: header, body: body);
     try {
       if (response.statusCode == 200) {

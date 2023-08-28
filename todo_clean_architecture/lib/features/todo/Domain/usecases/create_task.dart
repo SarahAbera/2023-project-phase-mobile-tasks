@@ -4,14 +4,13 @@ import '../../../../core/usecase/usecase.dart';
 import '../repositories/task_repository.dart';
 import '../../../../core/error/failure.dart';
 import '../entities/task.dart';
-
-class CreateTask implements UseCase<Tasks, Params> {
+class CreateTask implements UseCase<Tasks, Tasks> {
   final TasksRepository tasksRepository;
   CreateTask(this.tasksRepository);
 
   @override
-  Future<Either<Failure, Tasks>> call(Params params) async {
-    return await tasksRepository.createTasks(params.task);
+  Future<Either<Failure, Tasks>> call(Tasks tasks) async {
+    return await tasksRepository.createTasks(tasks);
   }
 }
 

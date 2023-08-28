@@ -8,5 +8,5 @@ abstract class TasksRepository {
   Future<Either<Failure, Tasks>> getOneTask(String taskId);
   Future<Either<Failure, Tasks>> createTasks(Tasks task);
   Future<Either<Failure, Tasks>> deleteTasks(String taskId);
-  Future<Either<Failure, Tasks>> updateTasks(TaskModel todo);
+  Future<Either<Failure, Tasks>> updateTasks(Tasks todo);
 }

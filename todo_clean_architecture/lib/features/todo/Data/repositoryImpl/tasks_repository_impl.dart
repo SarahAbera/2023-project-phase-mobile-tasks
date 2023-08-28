@@ -44,7 +44,7 @@ class TasksRepositoryImpl implements TasksRepository {
     if (await network.isConnected) {
       try {
         final remoteTasks = await remoteDataSource.getAllTasks();
-        localDataSource.cacheCurrentTodoList(remoteTasks);
+        // localDataSource.cacheCurrentTodoList(remoteTasks);
         return Right(remoteTasks);
       } on ServerException {
         return Left(ServerFailure());
@@ -70,7 +70,7 @@ class TasksRepositoryImpl implements TasksRepository {
   }
 
   @override
-  Future<Either<Failure, Tasks>> updateTasks(TaskModel todo) async {
+  Future<Either<Failure, Tasks>> updateTasks(Tasks todo) async {
     try {
       final remoteTasks = await remoteDataSource.updateTasks(todo);
       return Right(remoteTasks);
